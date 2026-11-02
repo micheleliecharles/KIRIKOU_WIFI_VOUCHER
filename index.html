@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIRIKOU Wi-Fi Voucher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête de marque -->
+        <header class="brand-header">
+            <h1>KIRIKOU CRÉATION</h1>
+            <p class="subtitle">Gestionnaire Hotspot & Wi-Fi Voucher</p>
+        </header>
+
+        <!-- Section 1 : Activation Code Client -->
+        <section class="card client-section">
+            <h2>Connexion Wi-Fi Client</h2>
+            <form id="activationForm">
+                <div class="input-group">
+                    <input type="text" id="voucherInput" placeholder="Entrez votre code (ex: KIR-XXXX)" required>
+                    <button type="submit" class="btn btn-primary">Activer l'accès</button>
+                </div>
+            </form>
+            <div id="activationResult" class="message-box"></div>
+        </section>
+
+        <!-- Section 2 : Panneau de Génération (Admin) -->
+        <section class="card admin-section">
+            <h2>Générer des Tickets</h2>
+            <form id="generateForm" class="grid-form">
+                <div class="form-group">
+                    <label for="codeCount">Nombre de codes :</label>
+                    <input type="number" id="codeCount" min="1" max="100" value="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="durationDays">Durée de validité (Jours) :</label>
+                    <input type="number" id="durationDays" min="1" max="365" value="1" required>
+                </div>
+                <button type="submit" class="btn btn-success">Générer les codes</button>
+            </form>
+        </section>
+
+        <!-- Section 3 : Tableau de bord & Gestion des Tickets -->
+        <section class="card dashboard-section">
+            <div class="dashboard-header">
+                <h2>Tableau de Bord des Codes</h2>
+                <button id="exportCsvBtn" class="btn btn-secondary">Exporter en CSV</button>
+            </div>
+
+            <!-- Filtres et Recherche -->
+            <div class="toolbar">
+                <input type="text" id="searchInput" placeholder="Rechercher par code ou appareil...">
+                <select id="statusFilter">
+                    <option value="ALL">Tous les statuts</option>
+                    <option value="PENDING">En attente</option>
+                    <option value="ACTIVE">Actifs</option>
+                    <option value="EXPIRED">Expirés</option>
+                    <option value="BLOCKED">Bloqués</option>
+                </select>
+            </div>
+
+            <!-- Stats rapides -->
+            <div class="stats-bar">
+                <span>Total: <b id="statTotal">0</b></span>
+                <span>En attente: <b id="statPending">0</b></span>
+                <span>Actifs: <b id="statActive">0</b></span>
+                <span>Expirés: <b id="statExpired">0</b></span>
+                <span>Bloqués: <b id="statBlocked">0</b></span>
+            </div>
+
+            <!-- Tableau -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Durée</th>
+                            <th>Statut</th>
+                            <th>Appareil (ID)</th>
+                            <th>Expiration</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="voucherTableBody">
+                        <!-- Rempli dynamiquement -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
